@@ -1,4 +1,5 @@
 import { IChessPiece } from "./types/IChessPiece";
+import { getNumericPosition, getChessNotation } from "../utils/chessMovesUtils";
 
 export class Pawn implements IChessPiece {
   currentPosition: string;
@@ -7,6 +8,14 @@ export class Pawn implements IChessPiece {
     this.currentPosition = currentPosition;
   }
   computeValidMoves(): string[] {
-    return [];
+    const [row, col] = getNumericPosition(this.currentPosition);
+    const moves: string[] = [];
+
+    const newRow = row + 1;
+    if (newRow < 8) {
+      moves.push(getChessNotation(newRow, col));
+    }
+
+    return moves;
   }
 }

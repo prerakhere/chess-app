@@ -1,4 +1,5 @@
 import { IChessPiece } from "./types/IChessPiece";
+import { getNumericPosition, getChessNotation } from "../utils/chessMovesUtils";
 
 export class King implements IChessPiece {
   currentPosition: string;
@@ -8,6 +9,22 @@ export class King implements IChessPiece {
   }
 
   computeValidMoves(): string[] {
-    return [];
+    const [row, col] = getNumericPosition(this.currentPosition);
+    const moves: string[] = [];
+
+    const directions = [
+      [0, -1], [0, 1],
+      [-1, 0], [1, 0],
+      [-1, -1], [1, 1],
+      [-1, 1], [1, -1]
+    ];
+
+    for (const [xDirection, yDirection] of directions) {
+      const newRow = row + xDirection;
+      const newCol = col + yDirection;
+      moves.push(getChessNotation(newRow, newCol));
+    }
+
+    return moves;
   }
 }
