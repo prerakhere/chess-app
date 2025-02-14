@@ -1,3 +1,4 @@
+import { InvalidPieceTypeError } from "../domain/errors/InvalidPieceTypeError";
 import { King } from "../domain/King";
 import { Pawn } from "../domain/Pawn";
 import { Queen } from "../domain/Queen";
@@ -13,7 +14,7 @@ export class ChessPieceFactory {
       case "pawn":
         return new Pawn(position);
       default:
-        return null;
+        throw new InvalidPieceTypeError();
     }
   }
 }

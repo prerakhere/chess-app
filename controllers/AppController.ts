@@ -1,7 +1,8 @@
 import { IAppController } from "./IAppController";
 import { ChessPieceMovesService } from "../services/ChessPieceMovesService";
 import { CLI } from "../clients/CLI";
-import { isValidPosition } from "../utils/chessMovesUtils";
+import { validatePieceTypeAndPositionInput } from "../utils/inputValidations";
+import { handleAppError } from "../utils/globalErrorHandler";
 
 export class AppController implements IAppController {
 
@@ -13,10 +14,11 @@ export class AppController implements IAppController {
   }
 
   getValidMoves(pieceType: string, position: string): void {
-    if (!isValidPosition(position)) {
-      console.log("invalid position from controller");
-      return;
+    try {
+      validatePieceTypeAndPositionInput(pieceType, position);
+      this.chessPieceMovesService.getValidMoves(pieceType, position);
+    } catch (err) {
+      handleAppError(err);
     }
-    this.chessPieceMovesService.getValidMoves(pieceType, position);
   }
 }
