@@ -22,7 +22,9 @@ export class King implements IChessPiece {
     for (const [xDirection, yDirection] of directions) {
       const newRow = row + xDirection;
       const newCol = col + yDirection;
-      moves.push(getChessNotation(newRow, newCol));
+      if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
+        moves.push(getChessNotation(newRow, newCol));
+      }
     }
 
     return moves;
