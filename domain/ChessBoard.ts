@@ -1,4 +1,4 @@
-import { getNumericPosition } from "../utils/chessMovesUtils";
+import { getNumericPosition } from "../utils/chessBoardNotationConvertors";
 import { IChessBoard } from "./types/IChessBoard";
 
 export class ChessBoard implements IChessBoard {

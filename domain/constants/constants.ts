@@ -1,0 +1,1 @@
+export const VALID_CHESS_PIECE_TYPES = ["king", "queen", "pawn"];

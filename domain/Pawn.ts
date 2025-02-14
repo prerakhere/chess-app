@@ -1,5 +1,5 @@
 import { IChessPiece } from "./types/IChessPiece";
-import { getNumericPosition, getChessNotation } from "../utils/chessMovesUtils";
+import { getNumericPosition, getChessNotation } from "../utils/chessBoardNotationConvertors";
 
 export class Pawn implements IChessPiece {
   currentPosition: string;
