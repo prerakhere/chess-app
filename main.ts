@@ -1,15 +1,16 @@
+import { CLI } from "./clients/CLI";
 import { AppController } from "./controllers/AppController";
 
 function main() {
-  const args = process.argv.slice(2);
+  const cliClient = new CLI();
 
-  if (args.length !== 2) {
-    console.error("2 arguments expected: ChessPieceType CurrentPosition");
+  if (!cliClient.areArgsValid()) {
+    cliClient.handleError("2 arguments expected: ChessPieceType CurrentPosition");
     return;
   }
 
-  const [pieceType, currentPosition] = args;
-  const appController = new AppController();
+  const [pieceType, currentPosition] = cliClient.getChessPieceTypeAndPositionInput();
+  const appController = new AppController(cliClient);
   appController.getValidMoves(pieceType, currentPosition);
 }
 
