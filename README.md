@@ -20,7 +20,11 @@ npm run start King, E4
 \
 Output:
 > D4, F4, E3, E5, D3, F5, F3, D5
-<br>  
+<br>
+
+Run tests with `npm test`
+<br>
+<br>
 
 ## Code / Low Level Architecture
 
