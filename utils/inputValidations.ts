@@ -14,6 +14,12 @@ function isValidChessPieceType(pieceType: string): boolean {
   return VALID_CHESS_PIECE_TYPES.includes(pieceType.toLowerCase());
 }
 
+
+export function sanitizePieceType(pieceType: string) {
+  // remove trailing comma
+  return pieceType.endsWith(",") ? pieceType.slice(0, -1) : pieceType;
+}
+
 export function validatePieceTypeAndPositionInput(pieceType: string, position: string): void {
   const errors: string[] = [];
 

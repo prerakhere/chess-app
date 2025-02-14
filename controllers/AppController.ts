@@ -1,6 +1,6 @@
 import { IAppController } from "./IAppController";
 import { ChessPieceMovesService } from "../services/ChessPieceMovesService";
-import { validatePieceTypeAndPositionInput } from "../utils/inputValidations";
+import { sanitizePieceType, validatePieceTypeAndPositionInput } from "../utils/inputValidations";
 import { handleAppError } from "../utils/globalErrorHandler";
 import { IClient } from "../clients/IClient";
 
@@ -14,8 +14,9 @@ export class AppController implements IAppController {
 
   getValidMoves(pieceType: string, position: string): void {
     try {
-      validatePieceTypeAndPositionInput(pieceType, position);
-      this.chessPieceMovesService.getValidMoves(pieceType, position);
+      const sanitizedPieceType = sanitizePieceType(pieceType);
+      validatePieceTypeAndPositionInput(sanitizedPieceType, position);
+      this.chessPieceMovesService.getValidMoves(sanitizedPieceType, position);
     } catch (err) {
       handleAppError(err);
     }
