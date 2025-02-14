@@ -1,14 +1,11 @@
 import { ChessPieceFactory } from "./ChessPieceFactory";
 import { IClient } from "../clients/IClient";
-import { ChessBoard } from "../domain/ChessBoard";
 import { handleAppError } from "../utils/globalErrorHandler";
 
 export class ChessPieceMovesService {
-  private board: ChessBoard;
   private client: IClient;
 
   constructor(client: IClient) {
-    this.board = new ChessBoard();
     this.client = client;
   }
 
@@ -16,7 +13,7 @@ export class ChessPieceMovesService {
     try {
       const piece = ChessPieceFactory.createChessPiece(type, position);
       if (piece) {
-        const validMoves = piece.computeValidMoves().filter(move => this.board.isValidPosition(move));
+        const validMoves = piece.computeValidMoves();
         this.client.fetchValidMoves(validMoves);
       }
     }
